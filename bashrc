@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-source /usr/share/git/completion/git-completion.bash
+source ~/.git-completion.bash
 source ~/.git-prompt.sh
 export TERM='xterm-256color'
 
@@ -13,18 +13,13 @@ export TERM='xterm-256color'
 # Aliases
 ##
 alias ls='ls --color=auto'
-alias schedule='gcalcli calw'
-alias agenda='gcalcli agenda'
-alias scan='/home/mtomwing/Scripts/net-scan.pl --listen 192.168.1.13 --clx2160n --scan-dir /home/mtomwing/Pictures/scans/'
 function workon() { 
-  if [ -d "$HOME/.envs/$1/" ]; then
-    source $HOME/.envs/$1/bin/activate;
+  if [ -d "$HOME/.virtualenv/$1/" ]; then
+    source $HOME/.virtualenv/$1/bin/activate;
     cd $HOME/Projects/$1;
   fi
 }
-function vpn() { /home/mtomwing/Source/sshuttle/sshuttle -r $1 0.0.0.0/0 --dns ;}
-
-alias diablo3='xrun /home/mtomwing/Scripts/d3.sh'
+alias vi='vim'
 
 ##
 # Shell colors
@@ -50,8 +45,8 @@ function parse_git_dirty {
   [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
 }
 
-# export PS1="${PURPLE}\h${WHITE}[${YELLOW}\w${WHITE}]${WHITE}[${GREEN}\$(parse_git_branch)${RED}\$(parse_git_dirty)${WHITE}]${NO_COLOR} "
-export PS1="${PURPLE}\h${WHITE}[${YELLOW}\w${WHITE}]\$(__git_ps1 '${WHITE}[${GREEN}%s${RED}'\$(parse_git_dirty)'${WHITE}]')${WHITE}${NO_COLOR} "
+#export PS1="${PURPLE}\h${WHITE} [${YELLOW}\w${WHITE}]${WHITE}[${GREEN}\$(parse_git_branch)${RED}\$(parse_git_dirty)${WHITE}]${NO_COLOR} "
+export PS1="${PURPLE}\h${WHITE} [${YELLOW}\w${WHITE}]\$(__git_ps1 '${WHITE}[${GREEN}%s${RED}'\$(parse_git_dirty)'${WHITE}]')${WHITE}${NO_COLOR} "
 export PS2=" > "
 export PS4=" + "
 
