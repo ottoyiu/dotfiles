@@ -47,7 +47,7 @@ function parse_git_dirty {
 }
 
 #export PS1="${PURPLE}\h${WHITE} [${YELLOW}\w${WHITE}]${WHITE}[${GREEN}\$(parse_git_branch)${RED}\$(parse_git_dirty)${WHITE}]${NO_COLOR} "
-export PS1="${PURPLE}\h${WHITE} [${YELLOW}\w${WHITE}]\$(__git_ps1 '${WHITE}[${GREEN}%s${RED}'\$(parse_git_dirty)'${WHITE}]')${WHITE}${NO_COLOR} "
+export PS1="${BLUE}\u${NO_COLOR}@${GREEN}\h${WHITE} [${YELLOW}\w${WHITE}]\$(__git_ps1 '${WHITE}[${GREEN}%s${RED}'\$(parse_git_dirty)'${WHITE}]')${WHITE}${NO_COLOR} "
 export PS2=" > "
 export PS4=" + "
 
