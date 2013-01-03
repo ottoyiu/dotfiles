@@ -20,7 +20,8 @@ function workon() {
   fi
 }
 alias vi='vim'
-
+alias screen='byobu'
+alias quit='exit'
 ##
 # Shell colors
 ##

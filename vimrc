@@ -21,7 +21,7 @@ let g:pymode_syntax_all = 1
 let g:pymode_lint_jump = 1
 let g:pymode_lint_write = 0
 let g:pymode_lint_checker = "pylint"
-noremap <F1> :PyLint<CR>
+noremap <F10> :PyLint<CR>
 
 " Powerline
 set laststatus=2
