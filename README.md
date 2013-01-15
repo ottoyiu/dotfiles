@@ -1,9 +1,7 @@
 dotfiles
 ========
 
-Dependencies:
-
-1) Install janus:
-```bash
-curl -Lo- https://bit.ly/janus-bootstrap | bash
-```
+Bash dev environment setup
+ - Solarized Dark for VIM
+ - GIT autocompletion
+ - Python-mode/PyLint
