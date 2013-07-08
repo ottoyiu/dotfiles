@@ -1,5 +1,11 @@
 [user]
   name = Otto Yiu
-	email = otto@live.ca
+  email = otto@live.ca
+  
 [color]
-	ui = true
+  ui = true
+
+[alias]
+  graph = log --all --graph --decorate --pretty=oneline --abbrev-commit
+  pl = pull --rebase
+
