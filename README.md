@@ -6,5 +6,9 @@ Bash dev environment setup
  - GIT autocompletion
  - Python-mode/PyLint
 
-dotfiles -R ~/dotfiles --force
-cd ~/dotfiles; git submodule update --init
+## Install
+```bash
+dotfiles -R ~/dotfiles --sync --force
+cd ~/dotfiles
+git submodule update --init
+```
