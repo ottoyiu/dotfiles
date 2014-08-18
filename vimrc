@@ -20,6 +20,7 @@ let g:pymode_folding = 0
 let g:pymode_syntax_all = 1
 let g:pymode_lint_jump = 1
 let g:pymode_lint_write = 0
+let g:pymode_lint_on_fly = 0
 let g:pymode_lint_checker = "pylint"
 noremap <F10> :PyLint<CR>
 
@@ -33,6 +34,7 @@ set expandtab
 set autoindent
 set smarttab
 set hlsearch
+set pastetoggle=<F9>
 
 " Just so I'll stick to HJKL
 inoremap  <Up>     <NOP>
@@ -51,3 +53,13 @@ autocmd FileType css setlocal shiftwidth=2 tabstop=2
 " Bindings to make my life easier
 noremap H ^
 noremap L $
+
+" syntastic
+let g:syntastic_check_on_open = 1
+let g:syntastic_aggregate_errors = 1
+
+" nerdtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+map <C-n> :NERDTreeToggle<CR>
