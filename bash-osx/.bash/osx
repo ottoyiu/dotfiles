@@ -1,0 +1,7 @@
+# vim: set filetype=sh:
+
+# not sure if this is OS X only...
+# colorized ls output
+alias ls='ls -GFh'
+
+alias vim='mvim -v'
