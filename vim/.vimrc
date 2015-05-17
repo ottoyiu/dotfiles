@@ -73,6 +73,7 @@ let NERDTreeIgnore=['\.DS_Store$', '\.vim$', '\.git$']
 set laststatus=2 " display all the time
 let g:airline_theme='solarized'
 set encoding=utf-8
+let g:airline_powerline_fonts = 1
 
 " youcompleteme
 let g:ycm_autoclose_preview_window_after_completion = 1
