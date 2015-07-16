@@ -24,3 +24,6 @@ $ git submodule update
   ```bash
 $ mkdir -p ~/.vim/{backups,swaps,undo}
   ```
+
+- make sure vim has clipboard support mode compiled
+- tmux-yank needs xclip and xsel
