@@ -8,6 +8,7 @@ call vundle#begin()
 " "call vundle#begin('~/some/path/here')
 
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
@@ -31,7 +32,6 @@ set t_Co=256 " set 256 colors
 let g:solarized_termtrans = 1 " terminal transparent bg support
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
-colorscheme solarized
 
 " misc
 set tabstop=4
@@ -85,11 +85,6 @@ nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-
-" Put VIM's temp files somewhere
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
-set undodir=~/.vim/undo
 
 " Highlight the current line
 set cursorline

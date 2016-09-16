@@ -17,7 +17,8 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+#font pango: Source Code Pro Normal 8
+font pango: Source Code Pro Normal, FontAwesome, 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -94,6 +95,8 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+#
+bindsym $mod+x move workspace to output right
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -144,8 +147,30 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Control+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+e exec "lock"
+
+workspace 1 output DVI-Ia
+workspace 2 output DVI-I-2
+workspace 3 output DVI-I-2
+workspace 4 output DVI-I-2
+workspace 5 output DVI-I-2
+workspace 6 output DVI-I-2
+workspace 7 output DVI-I-2
+workspace 8 output DVI-I-2
+workspace 9 output DVI-I-2
+workspace 10 output DVI-I-2
+
+workspace 11 output DVI-I-3
+workspace 12 output DVI-I-3
+workspace 13 output DVI-I-3
+workspace 14 output DVI-I-3
+workspace 15 output DVI-I-3
+workspace 16 output DVI-I-3
+workspace 17 output DVI-I-3
+workspace 18 output DVI-I-3
+workspace 19 output DVI-I-3
+workspace 20 output DVI-I-3
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -172,11 +197,34 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+bindsym $mod+minus exec --no-startup-id amixer -q set Master 2dB- unmute && pactl set-sink-mute 1 0
+bindsym $mod+plus exec --no-startup-id amixer -q set Master 2dB+ unmute && pactl set-sink-mute 1 0
+bindsym $mod+Shift+equal exec --no-startup-id amixer -q set Master mute
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+  status_command i3status
+  colors {
+    separator #AAAAAA
+    background #1f2326
+    statusline #FFFFFF
+    focused_workspace #9FCA56 #9FCA56 #151718
+    active_workspace #DCCD69 #DCCD69 #151718
+    inactive_workspace #1f2326 #1f2326 #AAAAAA
+    urgent_workspace #CE4045 #CE4045 #FFFFFF
+  }
 }
 
 exec xautolock -time 1 -locker 'lock' &
+exec pasystray &
+exec fluxgui &
+exec caffeine &
+
+client.focused #4F99D3 #4F99D3 #151718 #9FCA56
+client.focused_inactive #9FCA56 #9FCA56 #151718 #A074C4
+client.unfocused #1f2326 #1f2326 #AAAAAA #A074C4
+client.urgent #CE4045 #CE4045 #FFFFFF #DCCD69
+
+exec --no-startup-id feh --bg-scale /home/oyiu/Documents/wallpaper.jpg
+exec --no-startup-id compton --opacity-rule '100:window_type = "dock" && class_g = "i3bar"' --config ~/.config/compton.conf
