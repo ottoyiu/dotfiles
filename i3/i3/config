@@ -4,7 +4,6 @@
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
 #
-
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
@@ -13,12 +12,12 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-#font pango:monospace 8
+#font pango:monospace 9
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango: Source Code Pro Normal 8
-font pango: Source Code Pro Normal, FontAwesome, 8
+font pango: Source Code Pro Normal, FontAwesome 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -44,14 +43,14 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-#bindsym $mod+j focus left
-#bindsym $mod+k focus down
-#bindsym $mod+l focus up
-#bindsym $mod+semicolon focus right
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+#bindsym $mod+h focus left
+#bindsym $mod+j focus down
+#bindsym $mod+k focus up
+#bindsym $mod+l focus right
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -71,18 +70,20 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+semicolon split h
+#bindsym $mod+semicolon split h
+bindsym $mod+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
+bindsym $mod+shift+f        fullscreen toggle global
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+e layout splith
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -150,27 +151,26 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Control+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+e exec "lock"
 
-workspace 1 output DVI-Ia
-workspace 2 output DVI-I-2
-workspace 3 output DVI-I-2
-workspace 4 output DVI-I-2
-workspace 5 output DVI-I-2
-workspace 6 output DVI-I-2
-workspace 7 output DVI-I-2
-workspace 8 output DVI-I-2
-workspace 9 output DVI-I-2
-workspace 10 output DVI-I-2
+workspace 1 output DP-1
+workspace 2 output DP-1
+workspace 3 output DP-1
+workspace 4 output DP-1
+workspace 5 output DP-1
+workspace 6 output DP-1
+workspace 7 output DP-1
+workspace 8 output DP-1
+workspace 9 output DP-1
+workspace 10 output DP-1
 
-workspace 11 output DVI-I-3
-workspace 12 output DVI-I-3
-workspace 13 output DVI-I-3
-workspace 14 output DVI-I-3
-workspace 15 output DVI-I-3
-workspace 16 output DVI-I-3
-workspace 17 output DVI-I-3
-workspace 18 output DVI-I-3
-workspace 19 output DVI-I-3
-workspace 20 output DVI-I-3
+workspace 11 output HDMI-2
+workspace 12 output HDMI-2
+workspace 13 output HDMI-2
+workspace 14 output HDMI-2
+workspace 15 output HDMI-2
+workspace 16 output HDMI-2
+workspace 17 output HDMI-2
+workspace 18 output HDMI-2
+workspace 19 output HDMI-2
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -199,15 +199,21 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 bindsym $mod+minus exec --no-startup-id amixer -q set Master 2dB- unmute && pactl set-sink-mute 1 0
 bindsym $mod+plus exec --no-startup-id amixer -q set Master 2dB+ unmute && pactl set-sink-mute 1 0
-bindsym $mod+Shift+equal exec --no-startup-id amixer -q set Master mute
+bindsym $mod+Shift+equal exec --no-startup-id amixer -D pulse set Master toggle
+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 2dB- unmute && pactl set-sink-mute 1 0
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 2dB+ unmute && pactl set-sink-mute 1 0
+bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master toggle
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-  status_command i3status
+  status_command py3status -c ~/.i3/i3status.conf
+  #status_command i3status
   colors {
     separator #AAAAAA
-    background #1f2326
+    #background #1f2326
+    background #000000
     statusline #FFFFFF
     focused_workspace #9FCA56 #9FCA56 #151718
     active_workspace #DCCD69 #DCCD69 #151718
@@ -216,15 +222,21 @@ bar {
   }
 }
 
-exec xautolock -time 1 -locker 'lock' &
-exec pasystray &
-exec fluxgui &
-exec caffeine &
+#exec --no-startup-id xautolock -time 5 -locker 'lock' &
+exec --no-startup-id xss-lock -- lock &
+exec --no-startup-id redshift-gtk &
+exec --no-startup-id nm-applet &
 
 client.focused #4F99D3 #4F99D3 #151718 #9FCA56
 client.focused_inactive #9FCA56 #9FCA56 #151718 #A074C4
 client.unfocused #1f2326 #1f2326 #AAAAAA #A074C4
 client.urgent #CE4045 #CE4045 #FFFFFF #DCCD69
 
-exec --no-startup-id feh --bg-scale /home/oyiu/Documents/wallpaper.jpg
-exec --no-startup-id compton --opacity-rule '100:window_type = "dock" && class_g = "i3bar"' --config ~/.config/compton.conf
+#exec --no-startup-id feh --bg-scale /home/oyiu/Pictures/cute.jpg
+exec --no-startup-id compton --opacity-rule '100:window_type = "dock" && class_g = "i3bar"' --config ~/.config/compton.conf &
+#exec --no-startup-id nvidia-settings --assign CurrentMetaMode="$(nvidia-settings -q CurrentMetaMode -t|tr '\n' ' '|sed -e 's/.*:: \(.*\)/\1\n/g' -e 's/}/, ForceCompositionPipeline = On}/g')"
+#exec --no-startup-id /home/oyiu/dev/lightsOn/lightsOn.sh
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id systemctl --user enable synergy.service && systemctl --user start synergy.service
+#exec --no-startup-id xset -dpms
+exec --no-startup-id xset s 90 && xset dpms 1800 1800 1800
